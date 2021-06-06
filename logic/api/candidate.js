@@ -51,7 +51,7 @@ router.put('/update/:id', async (req, res) => {
 
 router.get('/calculate', async (req, res) => {
     try {
-        const result = await candidateController.getBy10(req.params.offser, req.params.index);
+        const result = await candidateController.normalize1(req.body.list);
         res.send(result);
     } catch (error) {
         console.log(error);
