@@ -5,6 +5,14 @@ let instantAxios = axios.create({
     baseURL: 'http://localhost:8000'
 })
 
-export const getUV = () => {
+export const getUngVienAll = () => {
+    return instantAxios.get('/candidate')
+}
+
+export const getUngVien = (id) => {
     return instantAxios.get('/create/'+id)
+}
+
+export const createUngVien = (body) => {
+    return instantAxios.post('/candidate',body)
 }
