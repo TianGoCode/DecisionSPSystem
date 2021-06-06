@@ -8,7 +8,7 @@ const candidateController = {};
 
 candidateController.create = async (data) => {
     try {
-        let newCandidate = new Candidate (data.hoVaTen, data.diaChi, data.ngaySinh, data.mail, data.sdt, data.kinhNghiem, data.trinhDoHocVan, data.trinhDoNgoaiNgu, data.viTriUngTuyen);
+        let newCandidate = new Candidate(data.hoVaTen, data.diaChi, data.ngaySinh, data.mail, data.sdt, data.kinhNghiem, data.trinhDoHocVan, data.trinhDoNgoaiNgu, data.viTriUngTuyen);
         console.log(newCandidate);
         const insertedNUT = await DB.nut.insertOne(newCandidate)
         newCandidate._id = insertedNUT.insertedId;
@@ -30,6 +30,42 @@ candidateController.getBy10 = async (offset, index) => {
     } catch (error) {
         console.log(error);
         throw error;
+    }
+}
+
+candidateController.read = async (id) => {
+    try {
+        const foundCandidate = await DB.nut.findOne({
+            _id: ObjectId(id)
+        })
+        let tmp = new Candidate("", '', '', '', '', '', '', '', '');
+        tmp.getDataFromDb(foundCandidate);
+        return tmp;
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
+}
+
+candidateController.update = async (id, data) => {
+    try {
+        const foundCandidate = await DB.nut.updateOne({
+            _id: ObjectId(id)
+        }, {
+            $set: data
+
+        })
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
+}
+
+candidateController.normalize1 = async () => {
+    try {
+        let tmpCompany = new Company("xxx");
+    } catch (error) {
+        console.log(error)
     }
 }
 

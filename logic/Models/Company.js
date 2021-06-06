@@ -5,6 +5,10 @@ class Company {
     doanhNghiep;
     diaChi;
 
+    constructor(doanhNghiep){
+        this.doanhNghiep = doanhNghiep
+    }
+
     chuanHoaCot(listCandidate) {
         let tmp = [...listCandidate];
 
