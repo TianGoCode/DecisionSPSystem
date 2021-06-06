@@ -2,7 +2,8 @@ const {
     ObjectId
 } = require('bson');
 const DB = require('../Models/database');
-const Candidate = require("../Models/Candidate")
+const Candidate = require("../Models/Candidate");
+const Company = require("../Models/Company");
 
 const candidateController = {};
 
@@ -61,9 +62,10 @@ candidateController.update = async (id, data) => {
     }
 }
 
-candidateController.normalize1 = async () => {
+candidateController.normalize1 = async (data) => {
     try {
         let tmpCompany = new Company("xxx");
+        tmpCompany.chuanHoaCot(data);
     } catch (error) {
         console.log(error)
     }
