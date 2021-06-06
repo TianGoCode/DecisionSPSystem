@@ -23,6 +23,11 @@ class Candidate{
         this.trinhDoNgoaiNgu = trinhDoNgoaiNgu;
         this.viTriUngTuyen = viTriUngTuyen
     }
+    getDataFromDb(data){
+        for (var attr in data) {
+            if (this.hasOwnProperty(attr)) this[attr] = data[attr];
+        }
+    }
 }
 
 module.exports = Candidate
