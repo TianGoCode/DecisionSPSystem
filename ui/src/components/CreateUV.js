@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { useHistory, useParams } from 'react-router'
+import { getUngVien, createUngVien} from '../axios'
 
 export default function CreateUV() {
     const param = useParams()
+    const history = useHistory()
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
     const [dateOfBirth, setDateOfBirth] = useState('')
@@ -16,15 +18,36 @@ export default function CreateUV() {
     
     useEffect(() => {
         if(id){
-            getUV(id).then(res => {
+            getUngVien(id).then(res => {
                 let data = res.data
                 setName(data.name)
                 setAddress(data.cvcv)
             })
         }
+
     })
 
     const submit = () => {
+        let body = {
+            newCandidate:{
+                hoVaTen: name,
+                diaChi: address,
+                ngaySinh: dateOfBirth,
+                mail: gmail,
+                sdt: numberphone,
+                kinhNghiem: exp,
+                trinhDoHocVan: trinhDo,
+                trinhDoNgoaiNgu: eng,
+                viTriUngTuyen: viTriut
+            }
+        }
+        console.log(body)
+        createUngVien(body).then(res => {
+            history.push('/')
+        })
+    }
+
+    const update = () => {
 
     }
 
@@ -40,7 +63,7 @@ export default function CreateUV() {
             <input placeholder="Nhập vào trình độ" value={trinhDo} onChange={(e)=>setTrinhdo(e.target.value)} />
             <input placeholder="Nhập vào vị trí ứng tuyển" value={viTriut} onChange={(e)=>setViTriut(e.target.value)} />
             <input placeholder="Nhập vào ngoại ngữ"  value={eng} onChange={(e)=>setEng(e.target.value)}/>
-            <button onClick={submit}>Submit</button>
+            <button onClick={id? update:submit}>Submit</button>
         </div>
     )
 }

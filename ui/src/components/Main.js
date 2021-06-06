@@ -1,36 +1,38 @@
 import React,{useState, useEffect} from 'react'
 import Table from 'react-bootstrap/Table'
 import { Link, useLocation, useHistory } from 'react-router-dom'
+import {getUngVienAll} from '../axios'
 
 export default function Main() {
 
     let location = useLocation()
     let history = useHistory()
     const [trongso, setTrongSo] = useState([0.1,0.2,0.1,0.1,0.1]);
-    const [dataUngVien, setDataUngVien] = useState([
-        {hoten: "TranDoanvu",
-        diachi: "Hanoi",
-        kn: "cvcvcv",
-        td: "cccc",
-        nn: "123"
-    }
-    ])
+    const [dataUngVien, setDataUngVien] = useState([])
     const [indexCheck, setIndexCheck] = useState('')
 
-    // useEffect(() => {
-    //     getUngVien().then(res => {
-    //         setDataUngVien(res.data)
-    //     })
-    // })
+    // {
+    //     hoten: "TranDoanvu",
+    //         diachi: "Hanoi",
+    //             kn: "cvcvcv",
+    //                 td: "cccc",
+    //                     nn: "123"
+    // }
+
+    useEffect(() => {
+        getUngVienAll().then(res => {
+            setDataUngVien(res.data)
+        })
+    },[])
 
     const renderItem = (item,index) => {
         return (<tr key={index}>
             <td>{index+1}</td>
-            <td>{item.hoten}</td>
-            <td>{item.diachi}</td>
-            <td>{item.kn}</td>
-            <td>{item.td}</td>
-            <td>{item.nn}</td>
+            <td>{item.hoVaTen}</td>
+            <td>{item.diaChi}</td>
+            <td>{item.kinhNghiem}</td>
+            <td>{item.trinhDoHocVan}</td>
+            <td>{item.trinhDoNgoaiNgu}</td>
             <td><input type="checkbox" onChange={() => {setIndexCheck(item._id)}}/></td>
         </tr>);
     }
@@ -40,7 +42,11 @@ export default function Main() {
     }
 
     const addInfor = () => {
-        history.push('/create-uv/'+indexCheck)
+        history.push('/create-uv')
+    }
+
+    const editInfor = () => {
+        history.push('/edit/'+indexCheck)
     }
 
     return (
@@ -60,7 +66,6 @@ export default function Main() {
                             </tr>
                         </thead>
                         <tbody>
-                            
                             {dataUngVien.map(renderItem)}
                         </tbody>
                     </Table>
@@ -68,7 +73,7 @@ export default function Main() {
                     <div id="roll-box">
                         <button onClick={showInfor}>Xem thông tin ứng viên</button>
                         <button onClick={addInfor}>Thêm ứng viên</button>
-                        <button>Sửa ứng viên</button>
+                        <button onClick={editInfor}>Sửa ứng viên</button>
                         <button>Xóa ứng viên</button>
                         <button>Thay đổi trọng số</button>
                         <button>Kết quả</button>

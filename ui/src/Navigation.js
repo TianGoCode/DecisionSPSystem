@@ -10,7 +10,8 @@ export default function Navigation() {
     return (
         <Router>
             <Route exact path='/' component={Main} />
-            <Route  path='/create-uv/:id' component={CreateUV} />
+            <Route path='/create-uv' component={CreateUV} />
+            <Route path='/edit/:id' component={CreateUV} />
         </Router>
     )
 }
