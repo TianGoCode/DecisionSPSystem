@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Main from './components/Main'
 import CreateUV from './components/CreateUV'
+import UngVien from './components/UngVien'
 
 export default function Navigation() {
     return (
@@ -12,6 +13,7 @@ export default function Navigation() {
             <Route exact path='/' component={Main} />
             <Route path='/create-uv' component={CreateUV} />
             <Route path='/edit/:id' component={CreateUV} />
+            <Route path='/show-uv/:id' component={UngVien} />
         </Router>
     )
 }

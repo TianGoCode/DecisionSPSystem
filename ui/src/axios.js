@@ -10,9 +10,14 @@ export const getUngVienAll = () => {
 }
 
 export const getUngVien = (id) => {
-    return instantAxios.get('/create/'+id)
+    return instantAxios.get('/candidate/find/'+id)
 }
 
 export const createUngVien = (body) => {
     return instantAxios.post('/candidate',body)
 }
+
+export const updateUngVien = (body, id) => {
+    return instantAxios.put('/candidate/update/'+id,body)
+}
+

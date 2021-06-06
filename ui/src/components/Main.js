@@ -38,7 +38,7 @@ export default function Main() {
     }
 
     const showInfor = () => {
-        history.push('/showuv/'+indexCheck)
+        history.push('/show-uv/'+indexCheck)
     }
 
     const addInfor = () => {
