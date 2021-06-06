@@ -39,7 +39,7 @@ router.get('/find/:id', async (req, res) => {
 
 router.put('/update/:id', async (req, res) => {
     try {
-        const result = await candidateController.update(req.params.id,req.body.data)
+        const result = await candidateController.update(req.params.id, req.body.data)
         res.send("update nut!");
     } catch (error) {
         console.log(error);
@@ -73,5 +73,28 @@ router.get('/delete/:id', async (req, res) => {
     }
 })
 
-router
+router.post('/weight/read', async (req, res) => {
+    try {
+        const result = await candidateController.addWeight();
+        res.send(result);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            Error: "Co gi do sai sai"
+        })
+    }
+})
+
+router.put('/weight/update', async (req, res) => {
+    try {
+        const result = await candidateController.updateWeight(req.body.weight);
+        res.send("weight updated!");
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            Error: "Co gi do sai sai"
+        })
+    }
+})
+
 module.exports = router;

@@ -76,7 +76,7 @@ candidateController.delete = async (id) => {
 candidateController.normalize1 = async () => {
     try {
         let data = await DB.nut.find().toArray();
-        
+
         let tmpCompany = new Company("xxx");
         let companyData = await DB.admin.findOne({
             _id: ObjectId("60bcde37d3c22d7ccba6dcd8")
@@ -84,9 +84,15 @@ candidateController.normalize1 = async () => {
         tmpCompany.getDataFromDb(companyData);
         let result = tmpCompany.chuanHoaCot(data);
         const solution = {}
-        solution.bestSS = await DB.nut.findOne({_id:ObjectId(result.bestSS)});
-        solution.bestSM = await DB.nut.findOne({_id:ObjectId(result.bestSM)});
-        solution.bestCS = await DB.nut.findOne({_id:ObjectId(result.bestCS)});
+        solution.bestSS = await DB.nut.findOne({
+            _id: ObjectId(result.bestSS)
+        });
+        solution.bestSM = await DB.nut.findOne({
+            _id: ObjectId(result.bestSM)
+        });
+        solution.bestCS = await DB.nut.findOne({
+            _id: ObjectId(result.bestCS)
+        });
         return solution;
     } catch (error) {
         console.log(error)
@@ -94,6 +100,33 @@ candidateController.normalize1 = async () => {
     }
 }
 
+candidateController.addWeight = async () => {
+    try {
+        const weight = await DB.admin.findOne({
+            _id: ObjectId("60bcde37d3c22d7ccba6dcd8")
+        });
+        console.log(weight.trongSo)
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
+
+candidateController.updateWeight = async (data) => {
+    try {
+        const weight = await DB.admin.updateOne({
+            _id: ObjectId("60bcde37d3c22d7ccba6dcd8")
+        }, {
+            $set: {
+                trongSo:data
+            }
+        });
+
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}
 
 
 module.exports = candidateController;
