@@ -61,5 +61,17 @@ router.get('/calculate', async (req, res) => {
     }
 })
 
+router.get('/delete/:id', async (req, res) => {
+    try {
+        const result = await candidateController.delete(req.params.id);
+        res.send("NUT deleted");
+    } catch (error) {
+        console.log(error);
+        res.status(400).send({
+            Error: "Co gi do sai sai"
+        })
+    }
+})
+
 router
 module.exports = router;
