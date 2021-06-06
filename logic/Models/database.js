@@ -7,6 +7,7 @@ const DB = {}
 client.connect(() => {
     console.log('mongodb connected');
     const db = client.db("DSS");
+    DB.nut = db.collection("nut");
 })
 
 module.exports = DB;
