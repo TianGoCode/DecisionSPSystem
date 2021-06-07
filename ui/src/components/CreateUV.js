@@ -1,24 +1,25 @@
 import React,{useState, useEffect} from 'react'
 import { useHistory, useParams } from 'react-router'
 import { getUngVien, createUngVien, updateUngVien} from '../axios'
+import { MDBDatePickerV5 } from 'mdbreact';
 
 export default function CreateUV() {
     const param = useParams()
     const history = useHistory()
     const [name, setName] = useState('')
-    const [address, setAddress] = useState('')
-    const [dateOfBirth, setDateOfBirth] = useState('')
+    const [address, setAddress] = useState('0')
+    const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString())
     const [gmail, setGmail] = useState('')
     const [numberphone, setNumberphone] = useState('')
-    const [exp, setExp] = useState('')
-    const [trinhDo, setTrinhdo] = useState('')
+    const [exp, setExp] = useState('0')
+    const [trinhDo, setTrinhdo] = useState('0')
     const [viTriut, setViTriut] = useState('')
-    const [eng, setEng] = useState('')
+    const [eng, setEng] = useState('0')
     const [id, setId] = useState(param.id)
     const [diaDiem, setdiaDiem] = useState(['rất xa(8km)','xa(5km ~ 8km)', 'vừa(2km ~ 5km)', 'gần(500m ~ 2km)','rất gần(~500m)'])
     const [suPhuHopExp, setSPH] = useState(['chưa có kinh nghiệm thực tập','thực tập 6 tháng/làm việc 1 năm','làm việc 2 năm trở lên'])
     const [suPHtrinhdoPV, setSPHTD] = useState(['trình độ tốt nghiệp C3','trình độ đại học tương đương yếu','trình độ đại học tương đương trung bình','trình độ đại học tương đương khá','trình độ đại học tương đương giỏi','sau đại học'])
-    const [suPHn2 , setsuPHn2] = useState(['0-450','450-800','800-990'])
+    const [suPHn2 , setsuPHn2] = useState(['Toeic 0~450','Toeic 450~800','Toeic 800~990'])
     
     useEffect(() => {
         if(id){
@@ -80,11 +81,11 @@ export default function CreateUV() {
     }
 
     return (
-        <div>
+        <div id="tao-ung-vien">
             <h1>{id? 'Sửa ứng viên':'Thêm ứng viên'}</h1>
-            <input placeholder="Nhập vào tên" value={name} onChange={(e)=>setName(e.target.value)} />
+            <label>Họ và tên:</label><input placeholder="Nhập vào tên" value={name} onChange={(e)=>setName(e.target.value)} />
             <br />
-            <select value={address} onChange={(e)=>setAddress(e.target.value)}>
+            <label>Địa chỉ:</label><select value={address} onChange={(e)=>setAddress(e.target.value)}>
                 {
                     diaDiem.map((item, index) => {
 
@@ -93,13 +94,13 @@ export default function CreateUV() {
                 }
             </select>
             <br />
-            <input placeholder="Nhập ngày sinh" value={dateOfBirth} onChange={(e)=>setDateOfBirth(e.target.value)} />
+            <label>Ngày sinh:</label><input placeholder="Nhập ngày sinh" value={dateOfBirth} onChange={(e)=>setDateOfBirth(e.target.value)} />
             <br />
-            <input placeholder="Nhập vào gmail" value={gmail} onChange={(e)=>setGmail(e.target.value)} />
+            <label>Gmail:</label><input placeholder="Nhập vào gmail" value={gmail} onChange={(e)=>setGmail(e.target.value)} />
             <br />
-            <input placeholder="Nhập vào số điện thoại" value={numberphone} onChange={(e)=>setNumberphone(e.target.value)} />
+            <label>Số điện thoại:</label><input placeholder="Nhập vào số điện thoại" value={numberphone} onChange={(e)=>setNumberphone(e.target.value)} />
             <br />
-            <select value={exp} onChange={(e) => setExp(e.target.value)}>
+            <label>Kinh nghiệm làm việc:</label><select value={exp} onChange={(e) => setExp(e.target.value)}>
                 {
                     suPhuHopExp.map((item, index) => {
 
@@ -108,7 +109,7 @@ export default function CreateUV() {
                 }
             </select>
             <br />
-            <select value={trinhDo} onChange={(e) => setTrinhdo(e.target.value)}>
+            <label>Trình độ học vấn:</label><select value={trinhDo} onChange={(e) => setTrinhdo(e.target.value)}>
                 {
                     suPHtrinhdoPV.map((item, index) => {
 
@@ -117,9 +118,9 @@ export default function CreateUV() {
                 }
             </select>
             <br />
-            <input placeholder="Nhập vào vị trí ứng tuyển" value={viTriut} onChange={(e)=>setViTriut(e.target.value)} />
+            <label>Vị trí ứng tuyển:</label><input placeholder="Nhập vào vị trí ứng tuyển" value={viTriut} onChange={(e)=>setViTriut(e.target.value)} />
             <br />
-            <select value={eng} onChange={(e) => setEng(e.target.value)}>
+            <label>Trình độ tiếng Anh:</label><select value={eng} onChange={(e) => setEng(e.target.value)}>
                 {
                     suPHn2.map((item, index) => {
 

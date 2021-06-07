@@ -73,3 +73,66 @@
   border-radius: 10px ;
   font-size: 1.1rem;
 }
+
+#tao-ung-vien {
+  position: relative;
+  width: 500px;
+  height: auto;
+  margin: auto;
+  margin-top: 40px;
+  border: 1px solid black;
+  padding: 20px 0 20px 20px;
+}
+
+#tao-ung-vien h1{
+  margin-left: 100px;
+  margin-bottom: 50px;
+}
+
+#tao-ung-vien input, select {
+  position: absolute;
+  width: 200px;
+  left: 200px;
+}
+
+#tao-ung-vien label {
+  margin-bottom: 20px;
+}
+
+#tao-ung-vien button {
+  width: 150px;
+  height: 50px;
+  margin-left: 140px;
+  margin-top: 20px;
+  background-color: orange;
+  color: #fff;
+  font-size: 1.1rem;
+  border: 1px solid;
+  border-radius: 10px;
+  flex-direction: non;
+}
+
+#tt-ung-vien {
+  position: relative;
+  width: 500px;
+  height: auto;
+  margin: auto;
+  margin-top: 40px;
+  border: 1px solid black;
+  padding: 20px 0 20px 20px;
+}
+
+#tt-ung-vien span{
+  position: absolute;
+  left: 220px;
+}
+
+#tt-ung-vien label {
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#tt-ung-vien h1 {
+  margin-left: 50px;
+  margin-bottom: 30px;
+}

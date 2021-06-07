@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import Table from 'react-bootstrap/Table'
 import { Link, useLocation, useHistory } from 'react-router-dom'
 import {getUngVienAll} from '../axios'
+import MyVerticallyCenteredModal from './MyModal'
 
 export default function Main() {
 
@@ -10,6 +11,7 @@ export default function Main() {
     const [trongso, setTrongSo] = useState([0.1,0.2,0.1,0.1,0.1]);
     const [dataUngVien, setDataUngVien] = useState([])
     const [indexCheck, setIndexCheck] = useState('')
+    const [modalShow, setModalShow] = useState(false)
 
     // {
     //     hoten: "TranDoanvu",
@@ -49,6 +51,15 @@ export default function Main() {
         history.push('/edit/'+indexCheck)
     }
 
+    const deleteInfor = () => {
+        history.push('/delete/')
+    }
+
+    const changeW = (array) => {
+        console.log(array)
+        setModalShow(false)
+    }
+
     return (
         <div>
             <div id="container-box">
@@ -62,7 +73,7 @@ export default function Main() {
                                 <th>Kinh nghiệm làm việc</th>
                                 <th>Trình độ học vấn</th>
                                 <th>Điểm ngoại ngữ</th>
-                                <th>V</th>
+                                <th>Chọn một</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,8 +85,10 @@ export default function Main() {
                         <button onClick={showInfor}>Xem thông tin ứng viên</button>
                         <button onClick={addInfor}>Thêm ứng viên</button>
                         <button onClick={editInfor}>Sửa ứng viên</button>
-                        <button>Xóa ứng viên</button>
-                        <button>Thay đổi trọng số</button>
+                        <button onClick={deleteInfor}>Xóa ứng viên</button>
+                        <>
+                        <button variant="primary" onClick={() => setModalShow(true)}>Thay đổi trọng số</button>
+                        <MyVerticallyCenteredModal  show={modalShow}  onHide={() => setModalShow(false)} /> </>
                         <button>Kết quả</button>
                     </div>
                </div>
@@ -97,3 +110,4 @@ export default function Main() {
         </div>
     )
 }
+
