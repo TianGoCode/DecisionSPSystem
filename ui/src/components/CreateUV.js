@@ -1,14 +1,14 @@
 import React,{useState, useEffect} from 'react'
 import { useHistory, useParams } from 'react-router'
 import { getUngVien, createUngVien, updateUngVien} from '../axios'
-import { MDBDatePickerV5 } from 'mdbreact';
+
 
 export default function CreateUV() {
     const param = useParams()
     const history = useHistory()
     const [name, setName] = useState('')
     const [address, setAddress] = useState('0')
-    const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString())
+    const [dateOfBirth, setDateOfBirth] = useState(new Date())
     const [gmail, setGmail] = useState('')
     const [numberphone, setNumberphone] = useState('')
     const [exp, setExp] = useState('0')

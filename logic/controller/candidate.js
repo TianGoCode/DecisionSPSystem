@@ -105,7 +105,7 @@ candidateController.addWeight = async () => {
         const weight = await DB.admin.findOne({
             _id: ObjectId("60bcde37d3c22d7ccba6dcd8")
         });
-        console.log(weight.trongSo)
+        return weight.trongSo
     } catch (error) {
         console.log(error)
         throw error

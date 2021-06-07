@@ -1,14 +1,15 @@
 import React,{useState, useEffect} from 'react'
 import Table from 'react-bootstrap/Table'
 import { Link, useLocation, useHistory } from 'react-router-dom'
-import {getUngVienAll} from '../axios'
+import {getUngVienAll , deleteUngVien} from '../axios'
 import MyVerticallyCenteredModal from './MyModal'
+import {getW} from '../axios'
 
 export default function Main() {
 
     let location = useLocation()
     let history = useHistory()
-    const [trongso, setTrongSo] = useState([0.1,0.2,0.1,0.1,0.1]);
+    const [trongso, setTrongSo] = useState([]);
     const [dataUngVien, setDataUngVien] = useState([])
     const [indexCheck, setIndexCheck] = useState('')
     const [modalShow, setModalShow] = useState(false)
@@ -25,7 +26,12 @@ export default function Main() {
         getUngVienAll().then(res => {
             setDataUngVien(res.data)
         })
+        getW().then(res => {
+            setTrongSo(res.data)
+        })
     },[])
+
+    
 
     const renderItem = (item,index) => {
         return (<tr key={index}>
@@ -52,12 +58,25 @@ export default function Main() {
     }
 
     const deleteInfor = () => {
-        history.push('/delete/')
+        let newArray = dataUngVien;
+        
+        newArray = newArray.filter(item => {
+            
+            return item._id != indexCheck;
+        })
+        setDataUngVien([...newArray])
+        deleteUngVien(indexCheck).then(res => {
+            alert("Xóa thành công");
+        })
     }
 
     const changeW = (array) => {
         console.log(array)
         setModalShow(false)
+    }
+
+    const kqInfor = () => {
+        history.push('/ket-qua')
     }
 
     return (
@@ -89,7 +108,7 @@ export default function Main() {
                         <>
                         <button variant="primary" onClick={() => setModalShow(true)}>Thay đổi trọng số</button>
                         <MyVerticallyCenteredModal  show={modalShow}  onHide={() => setModalShow(false)} /> </>
-                        <button>Kết quả</button>
+                        <button onClick={kqInfor}>Kết quả</button>
                     </div>
                </div>
                 <div id="bot-box">

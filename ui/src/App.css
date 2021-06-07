@@ -136,3 +136,32 @@
   margin-left: 50px;
   margin-bottom: 30px;
 }
+
+#container-best {
+  display: flex;
+}
+
+#container-best div {
+  position: relative;
+  width: 400px;
+  height: auto;
+  margin: auto;
+  margin-top: 40px;
+  border: 1px solid black;
+  padding: 20px 0 20px 20px;
+}
+
+#bestSS span {
+  position: absolute;
+  left: 220px;
+}
+
+#bestSM span {
+  position: absolute;
+  left: 220px;
+}
+
+#bestCS span {
+  position: absolute;
+  left: 220px;
+}

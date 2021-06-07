@@ -23,7 +23,7 @@ export default function UngVien() {
                 <label>Họ và Tên:</label><span>{ungVien.hoVaTen}</span> <br />
                 <label>Địa chỉ:</label><span>{ungVien.diaChi}</span> <br />
                 <label>Gmail:</label><span>{ungVien.mail}</span> <br />
-                <label>Ngày sinh:</label><span>{ungVien.ngaySinh}</span> <br />
+                <label>Ngày sinh:</label><span>{(new Date(ungVien.ngaySinh)).toDateString()}</span> <br />
                 <label>Số điện thoại:</label><span>{ungVien.sdt}</span> <br />
                 <label>Kinh nghiệm làm việc:</label><span>{ungVien.kinhNghiem}</span> <br />
                 <label>Trình độ học vấn:</label><span>{ungVien.trinhDoHocVan}</span> <br />

@@ -73,7 +73,7 @@ router.get('/delete/:id', async (req, res) => {
     }
 })
 
-router.post('/weight/read', async (req, res) => {
+router.get('/weight/read', async (req, res) => {
     try {
         const result = await candidateController.addWeight();
         res.send(result);
