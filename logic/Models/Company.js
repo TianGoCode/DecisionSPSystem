@@ -9,6 +9,12 @@ class Company {
         this.doanhNghiep = doanhNghiep
     }
 
+    getDataFromDb(data){
+        for (var attr in data) {
+            if (this.hasOwnProperty(attr)) this[attr] = data[attr];
+        }
+    }
+
     chuanHoaCot(listCandidate) {
         let tmp = [...listCandidate];
         let result = {}
@@ -30,12 +36,14 @@ class Company {
             wtrinhDoHocVan += (Number(item.trinhDoHocVan) ** 2);
             wtrinhdoNgoaiNgu += (Number(item.trinhDoNgoaiNgu) ** 2);
         }
+        
         wdiaChi = Math.sqrt(wdiaChi);
         wkinhNghiem = Math.sqrt(wkinhNghiem);
         wtrinhDoHocVan = Math.sqrt(wtrinhDoHocVan);
         wtrinhdoNgoaiNgu = Math.sqrt(wtrinhdoNgoaiNgu);
+        
         for (let item of tmp) {
-            item.diaChi = (Number(item.diaChi) / wdiaChi).toFixed(2) * 0.2;
+            item.diaChi = (Number(item.diaChi) / wdiaChi).toFixed(2) * this.trongSo[0];
             if (item.diaChi >= as1) {
                 as1 = item.diaChi;
             }
@@ -43,7 +51,7 @@ class Company {
                 am1 = item.diaChi
             }
 
-            item.kinhNghiem = (Number(item.kinhNghiem) / wkinhNghiem).toFixed(2) * 0.3;
+            item.kinhNghiem = (Number(item.kinhNghiem) / wkinhNghiem).toFixed(2) * this.trongSo[1];
             if (item.kinhNghiem >= as2) {
                 as2 = item.kinhNghiem;
             }
@@ -51,7 +59,7 @@ class Company {
                 am2 = item.kinhNghiem
             }
 
-            item.trinhDoHocVan = (Number(item.trinhDoHocVan) / wtrinhDoHocVan).toFixed(2) * 0.3;
+            item.trinhDoHocVan = (Number(item.trinhDoHocVan) / wtrinhDoHocVan).toFixed(2) * this.trongSo[2];
             if (item.trinhDoHocVan >= as3) {
                 as3 = item.trinhDoHocVan;
             }
@@ -59,7 +67,7 @@ class Company {
                 am3 = item.trinhDoHocVan
             }
 
-            item.trinhDoNgoaiNgu = (Number(item.trinhDoNgoaiNgu) / wtrinhdoNgoaiNgu).toFixed(2) * 0.2;
+            item.trinhDoNgoaiNgu = (Number(item.trinhDoNgoaiNgu) / wtrinhdoNgoaiNgu).toFixed(2) * this.trongSo[3];
             if (item.trinhDoNgoaiNgu >= as4) {
                 as4 = item.trinhDoNgoaiNgu;
             }
@@ -67,11 +75,9 @@ class Company {
                 am4 = item.trinhDoNgoaiNgu
             }
             // chuan hoa xong
-
-
         }
 
-        //tinh A*  va a- xong
+        // tinh A*  va a- xong
         result.AS = [as1, as2, as3, as4];
         result.AM = [am1, am2, am3, am4];
 
@@ -103,7 +109,7 @@ class Company {
         })
 
         result.bestCS = tmp[result.CS.indexOf(Math.max(...result.CS))]._id
-        console.log(result);
+        return result;
     }
 
 }
